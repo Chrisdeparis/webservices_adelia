@@ -1,0 +1,74 @@
+[INIT_PGM]
+
+sw_configurer *SERVICE '@Path' '/api/items'  /* Définition de la ressource racine */
+
+/* Route pour obtenir tous les éléments (Read) */
+[GET_ITEMS]
+sw_configurer *OPERATION '@GET' *BLANK
+sw_configurer *OPERATION '@Produces' 'application/json'
+
+/* Déclaration des paramètres */
+PARAM items,O[content]  /* En sortie : une liste d'items au format JSON */
+
+/* Route pour obtenir un élément par son ID (Read) */
+[GET_ITEM_BY_ID]
+sw_configurer *OPERATION '@Path' '/{id}'
+sw_configurer *OPERATION '@GET' *BLANK
+sw_configurer *OPERATION '@Produces' 'application/json'
+
+/* Déclaration des paramètres */
+ALPHA(15) id  /* En entrée : l'ID de l'item à récupérer ; support : segment d'URL [path] */
+REF_CLASSE(Item) item  /* En sortie : l'item au format JSON */
+
+PARAM id,I[path],item,O[content]
+
+/* Route pour créer un nouvel élément (Create) */
+[CREATE_ITEM]
+sw_configurer *OPERATION '@POST' *BLANK
+sw_configurer *OPERATION '@Consumes' 'application/json'
+sw_configurer *OPERATION '@Produces' 'application/json'
+
+/* Déclaration des paramètres */
+REF_CLASSE(Item) newItem  /* En entrée : les données du nouvel item au format JSON ; support : corps/contenu [content] */
+REF_CLASSE(Item) createdItem  /* En sortie : le nouvel item créé au format JSON */
+
+PARAM newItem,I[content],createdItem,O[content]
+
+/* Route pour mettre à jour un élément par son ID (Update) */
+[UPDATE_ITEM_BY_ID]
+sw_configurer *OPERATION '@Path' '/{id}'
+sw_configurer *OPERATION '@PUT' *BLANK
+sw_configurer *OPERATION '@Consumes' 'application/json'
+sw_configurer *OPERATION '@Produces' 'application/json'
+
+/* Déclaration des paramètres */
+ALPHA(15) id  /* En entrée : l'ID de l'item à mettre à jour ; support : segment d'URL [path] */
+REF_CLASSE(Item) item  /* En entrée : les nouvelles données de l'item au format JSON ; support : corps/contenu [content] */
+REF_CLASSE(Item) updatedItem  /* En sortie : l'item mis à jour au format JSON */
+
+PARAM id,I[path],item,I[content],updatedItem,O[content]
+
+/* Route pour mettre à jour partiellement un élément par son ID (Patch) */
+[PARTIAL_UPDATE_ITEM_BY_ID]
+sw_configurer *OPERATION '@Path' '/{id}'
+sw_configurer *OPERATION '@PATCH' *BLANK
+sw_configurer *OPERATION '@Consumes' 'application/json'
+sw_configurer *OPERATION '@Produces' 'application/json'
+
+/* Déclaration des paramètres */
+ALPHA(15) id  /* En entrée : l'ID de l'item à mettre à jour partiellement ; support : segment d'URL [path] */
+REF_CLASSE(Item) item  /* En entrée : les données partielles de l'item au format JSON ; support : corps/contenu [content] */
+REF_CLASSE(Item) partialUpdatedItem  /* En sortie : l'item partiellement mis à jour au format JSON */
+
+PARAM id,I[path],item,I[content],partialUpdatedItem,O[content]
+
+/* Route pour supprimer un élément par son ID (Delete) */
+[DELETE_ITEM_BY_ID]
+sw_configurer *OPERATION '@Path' '/{id}'
+sw_configurer *OPERATION '@DELETE' *BLANK
+
+/* Déclaration des paramètres */
+ALPHA(15) id  /* En entrée : l'ID de l'item à supprimer ; support : segment d'URL [path] */
+REF_CLASSE(Item) deletedItem  /* En sortie : message de succès au format JSON */
+
+PARAM id,I[path],deletedItem,O[content]
