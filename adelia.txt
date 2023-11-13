@@ -8,6 +8,9 @@ sw_configurer *OPERATION '@Path' '/{numberPlate}'          /* Associe une URI à
 sw_configurer *OPERATION '@GET' *BLANK                     /* Associe une action à la ressource
 sw_configurer *OPERATION '@Produces' 'application/json'    /* Définit le format du contenu en sortie
 
+* Documentation swagger
+SW_CONFIGURER *SERVICE '_swag_description' 'Service Web'
+
 /* Déclaration des variables paramètres
 ALPHA(15)           numberPlate
 REF_CLASSE(CAR)     iCar         
