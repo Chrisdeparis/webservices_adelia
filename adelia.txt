@@ -1,21 +1,21 @@
 [INIT_PGM]
-sw_configurer *SERVICE '@Path' '/cars'                     /* Définition de la ressource racine
+sw_configurer *SERVICE '@Path' '/cars'                     /* Définition de la ressource racine */
 
-[GET_CAR] /* Procédure publique ; ressource
+[GET_CAR] /* Procédure publique ; ressource */
 
 [DECL]
-sw_configurer *OPERATION '@Path' '/{numberPlate}'          /* Associe une URI à la ressource
-sw_configurer *OPERATION '@GET' *BLANK                     /* Associe une action à la ressource
-sw_configurer *OPERATION '@Produces' 'application/json'    /* Définit le format du contenu en sortie
+sw_configurer *OPERATION '@Path' '/{numberPlate}'          /* Associe une URI à la ressource */
+sw_configurer *OPERATION '@GET' *BLANK                     /* Associe une action à la ressource */
+sw_configurer *OPERATION '@Produces' 'application/json'    /* Définit le format du contenu en sortie */
 
 * Documentation swagger
 SW_CONFIGURER *SERVICE '_swag_description' 'Service Web'
 
-/* Déclaration des variables paramètres
+/* Déclaration des variables paramètres */
 ALPHA(15)           numberPlate
 REF_CLASSE(CAR)     iCar         
 
-/* Définition des informations en entrée, en sortie et des supports d'échange
-/* En entrée : un ALPHA (numberPlate) ; support : segment d'URL [path]
-/* En sortie : un objet (iCar)    ; support : corps/contenu [content]
+/* Définition des informations en entrée, en sortie et des supports d'échange */
+/* En entrée : un ALPHA (numberPlate) ; support : segment d'URL [path] */
+/* En sortie : un objet (iCar)    ; support : corps/contenu [content] */
 PARAM numberPlate,I[path],marque iCar,O[content]
